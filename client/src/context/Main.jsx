@@ -32,6 +32,29 @@ export const MainProvider = props => {
     }
   }
 
+  const getCourse = async(params) => {
+    const key = import.meta.env.VITE_RAPID_KEY;
+    console.log(params)
+    const options = {
+      method: 'GET',
+      url: 'https://golf-course-finder.p.rapidapi.com/course/details',
+      params: params,
+      headers: {
+        'X-RapidAPI-Host': 'golf-course-finder.p.rapidapi.com',
+        'X-RapidAPI-Key': key
+      }
+    };
+
+    try {
+      let res = await axios.request(options);
+      if(res.data) {
+        return res.data;
+      }
+    } catch (e) {
+      console.error('GET_COURSE', e)
+    }
+  }
+
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
@@ -56,7 +79,8 @@ export const MainProvider = props => {
     user,
     setUser,
     courses,
-    getLocation
+    getLocation,
+    getCourse
   }
 
   return (
