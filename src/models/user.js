@@ -1,13 +1,14 @@
 const { Schema, model } = require('mongoose');
-const bcrypt = reqire('bcrypt');
 
 const UserSchema = new Schema({
-  email: {
+  username: {
     type: String,
     required: true,
-    unique: true,
-    trim: true
-  }
+    unique: true
+  },
+  rounds: [Number]
 }, {timestamps: true})
 
-export const User = model('user', UserSchema)
+const User = model('user', UserSchema);
+
+module.exports = { User }
