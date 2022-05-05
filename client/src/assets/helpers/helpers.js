@@ -6,15 +6,11 @@ const handicap = (ags, courseRat, slope) => {
 
 // console.log(handicap(81, 61, 119));
 
-const scoreDifferncial = (ags, courseRat, slope) => {
+export const scoreDifferncial = (ags, courseRat, slope) => {
   return ((ags - courseRat)*113) / slope
 }
 
-console.log(scoreDifferncial(126, 68.2, 119));
-
-const avg = (...args) => (args.reduce((a, b)=>a+b,0) / args.length) * 0.96
-
-console.log(avg(34.4, 47.6, 54.8))
+export const avg = (...args) => (args.reduce((a, b)=>a+b,0) / args.length) * 0.96
 
 // ((Adjusted Gross Score - Course Rating) x 113) / Slope Rating = Score Differential.
 // Average the lowest score differentials according the USGA Chart

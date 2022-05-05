@@ -28,14 +28,39 @@ const getUsers = async(req, res) => {
       .lean()
       .exec()
 
-    res.status(200).json({ data: docs })
+    res.json({ data: docs })
   } catch (e) {
     console.error(e)
-    res.status(400).end()
+    res.sendStatus(400)
+  }
+}
+
+const updateOne = async (req, res) => {
+  try {
+    let updated;
+    if (req.body.round) {
+      updated = await User.findOneAndUpdate(
+        {_id: req.params.id}, {$push: {rounds: req.body.round}} ,{ new: true }
+    ).lean().exec()
+    } else {
+      updated = await User.findOneAndUpdate(
+          {_id: req.params.id}, req.body,{ new: true }
+      ).lean().exec()
+    }
+
+    if (!updated) {
+      return res.sendStatus(400)
+    }
+
+    res.json({ data: updated })
+  } catch (e) {
+    console.error(e)
+    res.sendStatus(400)
   }
 }
 
 module.exports = {
   getUsers,
-  createUser
+  createUser,
+  updateOne
 }

@@ -6,7 +6,6 @@ export const MainContext = createContext({});
 export const MainProvider = props => {
   const [coord, setCoord] = useState({radius: '20', lng: '', lat: ''});
   const [courses, setCourses] = useState([])
-  const [user, setUser] = useState({});
 
   const getCourses = async(loc) =>{
     const key = import.meta.env.VITE_RAPID_KEY;
@@ -76,8 +75,6 @@ export const MainProvider = props => {
   }, [coord])
 
   const value = {
-    user,
-    setUser,
     courses,
     getLocation,
     getCourse

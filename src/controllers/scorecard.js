@@ -32,6 +32,22 @@ const getOneCard = async(req, res) => {
   }
 }
 
+const updateCard = async(req, res) => {
+  const {id} = req.params;
+
+  try {
+    const updated = await ScoreCard.findOneAndUpdate({_id: id}, req.body, {new: true}).lean().exec();
+
+    if (!updated) {
+      return res.sendStatus(400)
+    }
+
+    res.status(200).json({ data: updated })
+  } catch (e) {
+    console.error(e)
+    res.sendStatus(400)
+  }
+}
 
 const createCard = async(req,res) => {
   try {
@@ -46,5 +62,6 @@ const createCard = async(req,res) => {
 module.exports = {
   getCards,
   createCard,
-  getOneCard
+  getOneCard,
+  updateCard
 }

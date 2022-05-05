@@ -35,7 +35,7 @@ const NavBar = ({signIn, user}) => {
                 <Nav.Link href='/'>Home</Nav.Link>
                 <Nav.Link href="/courses">Courses</Nav.Link>
                 <Nav.Link href="/cards">Score Cards</Nav.Link>
-                <Nav.Link href="/">Handicap</Nav.Link>
+                <Nav.Link href="/handicap">Handicap</Nav.Link>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>

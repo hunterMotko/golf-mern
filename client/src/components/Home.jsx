@@ -33,7 +33,11 @@ const Home = () => {
       <div className="row justify-content-center">
         <div className="col-12 col-md-6 text-center bg-dark rounded m-3 p-2 opacity-75 text-white">
           <h2>Calculate Your Handicap</h2>
-          <button className='btn btn-outline-success'>Track</button>
+          <button className='btn btn-outline-success'>
+            <Link to='/handicap' className="text-decoration-none text-success">
+              Calculate
+            </Link>
+          </button>
         </div>
       </div>
     </div>
