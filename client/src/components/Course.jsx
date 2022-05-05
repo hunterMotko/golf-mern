@@ -5,7 +5,8 @@ import {
   Container,
   Row,
   Col,
-  ListGroup
+  ListGroup,
+  Spinner
 } from 'react-bootstrap';
 
 const Course = () => {
@@ -65,7 +66,15 @@ const Course = () => {
               </Col>
             </Row>
           </Container> :
-        <div>Loading</div>
+          <Container>
+            <Row>
+              <Col className="d-flex justify-content-center">
+                <Spinner animation="border" variant='light' role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              </Col>
+            </Row>
+          </Container>
       }
     </>
   )

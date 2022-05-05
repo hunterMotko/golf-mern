@@ -34,7 +34,7 @@ export const MainProvider = props => {
 
   const getCourse = async(params) => {
     const key = import.meta.env.VITE_RAPID_KEY;
-    console.log(params)
+
     const options = {
       method: 'GET',
       url: 'https://golf-course-finder.p.rapidapi.com/course/details',

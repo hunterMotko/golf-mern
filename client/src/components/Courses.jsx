@@ -7,7 +7,8 @@ import {
   Row,
   Col,
   Card,
-  ListGroup
+  ListGroup,
+  Spinner
 } from 'react-bootstrap';
 
 const Courses = () => {
@@ -20,7 +21,7 @@ const Courses = () => {
   return (
     <Container>
       {
-        courses.length > 0 && courses.map(course=>(
+        courses.length > 0 ? courses.map(course=>(
           <Row key={course.name} className='courses my-2'>
             <Col>
               <Card  onClick={()=>getCourse(course)}>
@@ -33,6 +34,14 @@ const Courses = () => {
             </Col>
           </Row>
         ))
+        :
+        <Row>
+          <Col className="d-flex justify-content-center">
+            <Spinner animation="border" variant='light' role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </Col>
+        </Row>
       }
     </Container>
   )

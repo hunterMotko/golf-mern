@@ -7,9 +7,11 @@ import {
   ListGroup,
   Button
 } from 'react-bootstrap';
+import Card from './Card'
 
 const ScoreCards = () => {
   const [cards, setCards] = useState([]);
+  const [card, setCard] = useState({});
 
   const getCards = async()=>{
     let res = await axios.get('http://localhost:8080/api/card')
@@ -17,17 +19,27 @@ const ScoreCards = () => {
   }
 
   useEffect(()=>{
-    getCards();
+    if (!cards.length) {
+      getCards();
+    }
   }, []);
+
+  const getCard = card => {
+    setCard(card)
+  }
 
   return (
   <>
-    { cards.length > 0 ?
+    {
+    Object.keys(card).length > 0 ?
+      <Card card={card} />
+    :
+    cards.length > 0 ?
       <Container className="bg-dark p-1 rounded text-white">
           <Row>
             <Col>
               <h1>
-                Course Cards
+                Course Score Cards
               </h1>
             </Col>
           </Row>
@@ -35,7 +47,7 @@ const ScoreCards = () => {
             <Col>
               <ListGroup>
                 {cards.map(item=>(
-                  <ListGroup.Item key={item._id} action>{item.course}</ListGroup.Item>
+                  <ListGroup.Item key={item._id} action onClick={()=>getCard(item)}>{item.course}</ListGroup.Item>
                 ))}
               </ListGroup>
             </Col>
@@ -43,7 +55,7 @@ const ScoreCards = () => {
           <Row className='my-2'>
             <Col>
               <Button>
-                Create New ScoreCard
+                Add A Course Score Card
               </Button>
             </Col>
           </Row>
@@ -58,7 +70,6 @@ const ScoreCards = () => {
         </Container>
     }
   </>
-
   )
 }
 
