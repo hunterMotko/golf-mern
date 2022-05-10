@@ -166,6 +166,7 @@ const Card = ({card}) => {
   const [toggleSelect, setToggleSelect] = useState(false);
   const [play, setPlay] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [finalScore, setFinalScore] = useState([]);
 
   const selectSide = e => {
     let [item] = card.sides.filter(item => item._id === e.target.value);
@@ -211,9 +212,12 @@ const Card = ({card}) => {
     let res = players.map((player, i)=>{
       let f = total(firstScores[i])
       let s = total(secondScores[i])
+      setFinalScore([
+        ...finalScore, {name: player.username, total: (f+s)}
+      ])
       return {id: player._id, total: (f+s)}
     })
-
+    console.log(res);
     for(let item of res) {
       await axios.post(`http://localhost:8080/api/user/${item.id}`, {round: item.total})
     }
@@ -231,10 +235,19 @@ const Card = ({card}) => {
   return (
   <>
   {submitted?
-    <Container className='bg-dark rounded p-1 my-2 text-white'>
-      <Row>
+    <Container>
+      <Row className='bg-dark rounded p-1 my-2 text-white text-center'>
         <Col>
           <h1>Thank you for playing!</h1>
+        </Col>
+      </Row>
+      <Row className='bg-dark rounded p-1 my-2 text-white text-center'>
+        <Col>
+          {finalScore.map(play=>(
+            <h3 key={play.name}>
+              {play.name} your final score was {play.total}
+            </h3>
+          ))}
         </Col>
       </Row>
     </Container>

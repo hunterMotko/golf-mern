@@ -47,7 +47,7 @@ const Course = () => {
                   <ListGroup.Item>
                     Course Hours
                     <ul className='text-decoration-none'>
-                      {course.opening_hours.weekday_text && course.opening_hours.weekday_text.map((item, i)=>(
+                      {course.opening_hours?.weekday_text && course.opening_hours.weekday_text.map((item, i)=>(
                         <li key={i}>{item}</li>
                       ))}
                     </ul>
